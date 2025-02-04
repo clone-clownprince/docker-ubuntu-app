@@ -19,13 +19,9 @@ jobs:
 
       - name: Run Unit Test (Container Health Check)
         run: |
-          # Start the container in detached mode
           container_id=$(docker run -d -p 8080:80 clownprince/ubuntu-app:latest)
-          # Wait a few seconds for Apache to start
           sleep 5
-          # Check if the index page returns the expected content
           curl -s http://localhost:8080 | grep "Hello from my Ubuntu-based App"
-          # Stop the container
           docker stop $container_id
 
       - name: Security Scan with Trivy
